@@ -1,0 +1,31 @@
+**`port_scanner.py`**
+```python
+import socket
+
+def port_scan(target, ports=range(20, 1025)):
+    print(f"Scanning target {target}...")
+    for port in ports:
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(0.5)
+            result = sock.connect_ex((target, port))
+            if result == 0:
+                print(f"[OPEN] Port {port}")
+            sock.close()
+        except:
+            pass
+
+if __name__ == "__main__":
+    target_ip = "127.0.0.1"  # Change this to a real IP
+    port_scan(target_ip, range(20, 100))
+
+img = Image.open("sample.jpg")  # Replace with your own image
+input_img = transform(img).unsqueeze(0)
+
+input_img.requires_grad = True
+output = model(input_img)
+loss = nn.CrossEntropyLoss()(output, torch.tensor([3]))  # Fake target
+loss.backward()
+
+perturbed = fgsm_attack(input_img, 0.05, input_img.grad.data)
+print("Generated adversarial example.")
